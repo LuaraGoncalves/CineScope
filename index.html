@@ -29,7 +29,10 @@
                 <select id="genre-filter">
                     <option value="">Todos os Gêneros</option>
                 </select>
-                <input type="number" id="year-filter" placeholder="Ano">
+                <input type="text" id="year-filter" placeholder="Ano" list="year-options">
+                <datalist id="year-options">
+                    <!-- Opções de ano serão inseridas aqui pelo JavaScript -->
+                </datalist>
                 <select id="rating-filter">
                     <option value="">Qualquer Classificação</option>
                     <option value="8">8+</option>

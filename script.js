@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const recommenderContainer = document.getElementById('recommender-container');
     const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('main section');
+    const yearOptions = document.getElementById('year-options');
 
     // Funções de Watchlist
     const getWatchlist = () => JSON.parse(localStorage.getItem('watchlist')) || [];
@@ -455,8 +456,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
+    // Função para popular o filtro de anos
+    const populateYearFilter = () => {
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= 1900; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            yearOptions.appendChild(option);
+        }
+    };
+
     // Carga inicial
     setupInitialView();
+    populateYearFilter();
     fetchGenres();
     fetchMovies();
     renderWatchlist();
