@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineScope - Dashboard de Filmes e Séries</title>
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <header>
+        <h1>CineScope</h1>
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#watchlist">Minha Lista</a>
+            <a href="#recomendador">Recomendador</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#trailers">Trailers</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard de Filmes e Séries</h2>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Pesquisar por nome...">
+                <button id="search-button">Pesquisar</button>
+            </div>
+            <div class="filter-container">
+                <select id="genre-filter">
+                    <option value="">Todos os Gêneros</option>
+                </select>
+                <input type="number" id="year-filter" placeholder="Ano">
+                <select id="rating-filter">
+                    <option value="">Qualquer Classificação</option>
+                    <option value="8">8+</option>
+                    <option value="7">7+</option>
+                    <option value="6">6+</option>
+                </select>
+            </div>
+            <div id="movie-container" class="movie-container">
+                <!-- Cards de filmes e séries serão inseridos aqui -->
+            </div>
+        </section>
+
+        <section id="watchlist">
+            <h2>Minha Lista de Favoritos</h2>
+            <div id="watchlist-container" class="movie-container">
+                <!-- Filmes favoritos serão inseridos aqui -->
+            </div>
+        </section>
+
+        <section id="recomendador">
+            <h2>Recomendador de Filmes</h2>
+            <div class="filter-container">
+                <select id="recommender-genre-filter">
+                    <option value="">Escolha um gênero para obter recomendações</option>
+                </select>
+            </div>
+            <div id="recommender-container" class="movie-container">
+                <!-- Recomendações de filmes serão inseridas aqui -->
+            </div>
+        </section>
+
+        <section id="quiz">
+            <h2>Quiz de Filmes e Séries</h2>
+            <div id="quiz-container">
+                <div id="quiz-start-screen">
+                    <p>Teste seus conhecimentos sobre filmes e séries!</p>
+                    <button id="start-quiz-btn">Começar Quiz</button>
+                </div>
+                <div id="quiz-game-screen" style="display: none;">
+                    <div id="quiz-question"></div>
+                    <div id="quiz-options" class="quiz-options"></div>
+                    <p id="quiz-feedback"></p>
+                    <button id="next-question-btn" style="display: none;">Próxima Pergunta</button>
+                </div>
+                <div id="quiz-end-screen" style="display: none;">
+                    <h3>Quiz Finalizado!</h3>
+                    <p>Sua pontuação: <span id="final-score">0</span></p>
+                    <p>Recorde: <span id="high-score">0</span></p>
+                    <button id="restart-quiz-btn">Jogar Novamente</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="trailers">
+            <h2>Trailers em Destaque</h2>
+            <div class="carousel-container">
+                <div id="trailer-carousel" class="carousel">
+                    <!-- Trailers serão inseridos aqui -->
+                </div>
+                <button class="carousel-btn prev"><</button>
+                <button class="carousel-btn next">></button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal de Detalhes do Filme -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-body">
+                <!-- Conteúdo do modal será inserido aqui -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CineScope.</p>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
