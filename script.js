@@ -13,10 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalBody = document.getElementById('modal-body');
     const closeButton = document.querySelector('.close-button');
     const watchlistContainer = document.getElementById('watchlist-container');
-    const recommenderGenreFilter = document.getElementById('recommender-genre-filter');
-    const recommenderContainer = document.getElementById('recommender-container');
     const navLinks = document.querySelectorAll('nav a');
+    const notificationBell = document.getElementById('notification-bell');
+    const notificationDot = document.getElementById('notification-dot');
+    const newsModal = document.getElementById('news-modal');
+    const newsContainer = document.getElementById('news-container');
+    const newsModalCloseButton = newsModal.querySelector('.close-button');
     const sections = document.querySelectorAll('main section');
+    const newsApiKey = 'YOUR_NEWS_API_KEY'; // Adicione sua chave de API do NewsAPI aqui
     const yearOptions = document.getElementById('year-options');
 
     // Funções de Watchlist
@@ -122,23 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Função para buscar recomendações
-    const fetchRecommendations = async (genreId) => {
-        if (!apiKey || apiKey === 'YOUR_API_KEY' || !genreId) {
-            recommenderContainer.innerHTML = `<p>Selecione um gênero para ver as recomendações.</p>`;
-            return;
-        }
-        const url = `${apiUrl}/discover/movie?api_key=${apiKey}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreId}`;
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            displayMovies(data.results, recommenderContainer);
-        } catch (error) {
-            console.error('Erro ao buscar recomendações:', error);
-            recommenderContainer.innerHTML = `<p style="color: var(--text-color);">Não foi possível carregar as recomendações.</p>`;
-        }
-    };
-    
     // Função para buscar e exibir detalhes do filme
     const showMovieDetails = async (movieId) => {
         if (!apiKey || apiKey === 'YOUR_API_KEY') return;
@@ -214,10 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
              const query = searchInput.value.trim();
              fetchMovies(query, genreFilter.value, yearFilter.value, ratingFilter.value);
         });
-    });
-
-    recommenderGenreFilter.addEventListener('change', () => {
-        fetchRecommendations(recommenderGenreFilter.value);
     });
 
     // Lógica do Quiz
@@ -361,11 +344,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const trailerCarousel = document.getElementById('trailer-carousel');
     const prevBtn = document.querySelector('.carousel-btn.prev');
     const nextBtn = document.querySelector('.carousel-btn.next');
+    const trailerSearchInput = document.getElementById('trailer-search-input');
+    const trailerSearchButton = document.getElementById('trailer-search-button');
     let trailerIndex = 0;
 
-    const fetchTrendingTrailers = async () => {
+    const fetchTrendingTrailers = async (query = '') => {
         if (!apiKey || apiKey === 'YOUR_API_KEY') return;
-        const url = `${apiUrl}/trending/movie/week?api_key=${apiKey}&language=pt-BR`;
+        let url = `${apiUrl}/trending/movie/week?api_key=${apiKey}&language=pt-BR`;
+        if (query) {
+            url = `${apiUrl}/search/movie?api_key=${apiKey}&language=pt-BR&query=${encodeURIComponent(query)}`;
+        }
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -419,6 +407,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     prevBtn.addEventListener('click', () => moveCarousel(-1));
     nextBtn.addEventListener('click', () => moveCarousel(1));
+
+    trailerSearchButton.addEventListener('click', () => {
+        const query = trailerSearchInput.value.trim();
+        fetchTrendingTrailers(query);
+    });
+
+    trailerSearchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            const query = trailerSearchInput.value.trim();
+            fetchTrendingTrailers(query);
+        }
+    });
 
     // Lógica de Navegação SPA (Single Page Application)
     const handleNavigation = (e) => {
@@ -482,6 +482,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Funções de Notícias
+    const fetchNews = async () => {
+        if (!newsApiKey || newsApiKey === 'YOUR_NEWS_API_KEY') return;
+        const query = 'filme OR cinema OR ator OR atriz';
+        const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=pt&sortBy=publishedAt&apiKey=${newsApiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            const articles = data.articles.slice(0, 10); // Limita a 10 notícias
+
+            const lastSeenDate = localStorage.getItem('lastSeenNewsDate');
+            if (articles.length > 0 && (!lastSeenDate || new Date(articles[0].publishedAt) > new Date(lastSeenDate))) {
+                notificationDot.style.display = 'block';
+            }
+
+            newsContainer.innerHTML = articles.map(article => `
+                <div class="news-item">
+                    <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+                    <p>${article.description || ''}</p>
+                    <small>${new Date(article.publishedAt).toLocaleDateString()}</small>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Erro ao buscar notícias:', error);
+        }
+    };
+
+    notificationBell.addEventListener('click', () => {
+        newsModal.style.display = 'block';
+        notificationDot.style.display = 'none';
+        if (newsContainer.children.length > 0) {
+            const latestNewsDate = new Date(newsContainer.querySelector('.news-item small').textContent).toISOString();
+            localStorage.setItem('lastSeenNewsDate', latestNewsDate);
+        }
+    });
+
+    newsModalCloseButton.addEventListener('click', () => {
+        newsModal.style.display = 'none';
+    });
+
     // Carga inicial
     setupInitialView();
     populateYearFilter();
@@ -489,4 +530,5 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchMovies();
     renderWatchlist();
     fetchTrendingTrailers();
+    fetchNews();
 });

@@ -108,7 +108,7 @@ select {
 
 .movie-container {
     display: grid;
-    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
@@ -162,12 +162,41 @@ select {
     font-weight: bold;
 }
 
-footer {
+.footer {
     text-align: center;
-    padding: 1.5rem;
+    padding: 1rem;
     background-color: var(--secondary-color);
-    border-top: 2px solid var(--accent-color);
+    border-top: 1px solid var(--accent-color);
     margin-top: 2rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    margin: 0.5rem 0;
+}
+
+.footer-icon {
+    color: var(--text-light);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.footer-icon img {
+    width: 18px;
+    height: 18px;
+}
+
+.creditos {
+    font-size: 0.8rem;
+    color: #aaa;
 }
 
 @keyframes fadeIn {
@@ -405,4 +434,54 @@ body.modal-open {
 
 .carousel-btn.next {
     right: 10px;
+}
+
+/* Estilos da Notificação */
+.notification-container {
+    position: relative;
+}
+
+.notification-bell {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notification-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #00bfff;
+    border-radius: 50%;
+}
+
+#news-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.news-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.news-item p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.news-item a {
+    color: var(--text-color);
+    text-decoration: none;
 }

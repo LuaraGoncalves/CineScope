@@ -13,10 +13,20 @@
         <nav>
             <a href="#dashboard">Dashboard</a>
             <a href="#watchlist">Minha Lista</a>
-            <a href="#recomendador">Recomendador</a>
             <a href="#quiz">Quiz</a>
             <a href="#trailers">Trailers</a>
         </nav>
+        <div class="notification-container">
+            <div id="notification-bell" class="notification-bell">&#128276;</div>
+            <div id="notification-dot" class="notification-dot" style="display: none;"></div>
+            <div id="news-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Últimas Notícias</h2>
+                    <div id="news-container"></div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -53,18 +63,6 @@
             </div>
         </section>
 
-        <section id="recomendador">
-            <h2>Recomendador de Filmes</h2>
-            <div class="filter-container">
-                <select id="recommender-genre-filter">
-                    <option value="">Escolha um gênero para obter recomendações</option>
-                </select>
-            </div>
-            <div id="recommender-container" class="movie-container">
-                <!-- Recomendações de filmes serão inseridas aqui -->
-            </div>
-        </section>
-
         <section id="quiz">
             <h2>Quiz de Filmes e Séries</h2>
             <div id="quiz-container">
@@ -89,6 +87,10 @@
 
         <section id="trailers">
             <h2>Trailers em Destaque</h2>
+            <div class="search-container">
+                <input type="text" id="trailer-search-input" placeholder="Pesquisar por trailer...">
+                <button id="trailer-search-button">Pesquisar</button>
+            </div>
             <div class="carousel-container">
                 <div id="trailer-carousel" class="carousel">
                     <!-- Trailers serão inseridos aqui -->
@@ -110,9 +112,23 @@
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 CineScope.</p>
-    </footer>
+    <footer class="footer">
+  <div class="footer-container">
+    <p>© 2025 CineScope. Todos os direitos reservados.</p>
+
+    <div class="footer-links">
+      <a href="mailto:contato@cinescope.com" class="footer-icon">
+        📧 contato@cinescope.com
+      </a>
+      <a href="https://www.linkedin.com/in/luaradev" target="_blank" class="footer-icon">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" />
+        LinkedIn
+      </a>
+    </div>
+
+    <p class="creditos">Desenvolvido por <strong>Luara Gonçalves</strong></p>
+  </div>
+</footer>
 
     <script src="script.js?v=2"></script>
 </body>
