@@ -73,6 +73,8 @@ h2 {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 #search-input, #year-filter {
@@ -106,7 +108,7 @@ select {
 
 .movie-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 

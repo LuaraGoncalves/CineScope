@@ -456,14 +456,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // Função para popular o filtro de anos
+    // Função para popular o filtro de anos com infinite scroll
     const populateYearFilter = () => {
         const currentYear = new Date().getFullYear();
-        for (let year = currentYear; year >= 1900; year--) {
-            const option = document.createElement('option');
-            option.value = year;
-            yearOptions.appendChild(option);
-        }
+        let lastLoadedYear = currentYear;
+        const yearsPerLoad = 20;
+
+        const loadMoreYears = () => {
+            const endYear = Math.max(1900, lastLoadedYear - yearsPerLoad);
+            for (let year = lastLoadedYear; year > endYear; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearFilter.appendChild(option);
+            }
+            lastLoadedYear = endYear;
+        };
+
+        loadMoreYears(); // Carga inicial
+
+        yearFilter.addEventListener('scroll', () => {
+            if (yearFilter.scrollTop + yearFilter.clientHeight >= yearFilter.scrollHeight) {
+                loadMoreYears();
+            }
+        });
     };
 
     // Carga inicial

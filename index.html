@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -26,18 +27,18 @@
                 <button id="search-button">Pesquisar</button>
             </div>
             <div class="filter-container">
-                <select id="genre-filter">
+                <select id="genre-filter" size="1" onmousedown="this.size=4;" onchange='this.size=1;' onblur="this.size=1;">
                     <option value="">Todos os Gêneros</option>
                 </select>
-                <input type="text" id="year-filter" placeholder="Ano" list="year-options">
-                <datalist id="year-options">
-                    <!-- Opções de ano serão inseridas aqui pelo JavaScript -->
-                </datalist>
-                <select id="rating-filter">
+                <select id="year-filter" size="1" onmousedown="this.size=4;" onchange='this.size=1;' onblur="this.size=1;">
+                    <option value="">Todos os Anos</option>
+                </select>
+                <select id="rating-filter" size="1" onmousedown="this.size=4;" onchange='this.size=1;' onblur="this.size=1;">
                     <option value="">Qualquer Classificação</option>
                     <option value="8">8+</option>
                     <option value="7">7+</option>
                     <option value="6">6+</option>
+                    <option value="5">5+</option>
                 </select>
             </div>
             <div id="movie-container" class="movie-container">
