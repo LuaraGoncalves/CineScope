@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineScope - Dashboard de Filmes e Séries</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>CineScope</h1>
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#watchlist">Minha Lista</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#trailers">Trailers</a>
+        </nav>
+        <div class="notification-container">
+            <div id="notification-bell" class="notification-bell">&#128276;</div>
+            <div id="notification-dot" class="notification-dot" style="display: none;"></div>
+            <div id="news-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Últimas Notícias</h2>
+                    <div id="news-container"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard de Filmes e Séries</h2>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Pesquisar por nome...">
+                <button id="search-button">Pesquisar</button>
+            </div>
+            <div class="filter-container">
+                <select id="genre-filter" size="1" onmousedown="this.size=4;" onchange='this.size=1;' onblur="this.size=1;">
+                    <option value="">Todos os Gêneros</option>
+                </select>
+                <select id="year-filter" size="1" onmousedown="this.size=4;" onchange='this.size=1;' onblur="this.size=1;">
+                    <option value="">Todos os Anos</option>
+                </select>
+                <select id="rating-filter" size="1" onmousedown="this.size=4;" onchange='this.size=1;' onblur="this.size=1;">
+                    <option value="">Qualquer Classificação</option>
+                    <option value="8">8+</option>
+                    <option value="7">7+</option>
+                    <option value="6">6+</option>
+                    <option value="5">5+</option>
+                </select>
+            </div>
+            <div id="movie-container" class="movie-container"></div>
+        </section>
+
+        <section id="watchlist">
+            <h2>Minha Lista de Favoritos</h2>
+            <div id="watchlist-container" class="movie-container"></div>
+        </section>
+
+        <section id="quiz">
+            <h2>Quiz de Filmes e Séries</h2>
+            <div id="quiz-container">
+                <div id="quiz-start-screen">
+                    <p>Teste seus conhecimentos sobre filmes e séries!</p>
+                    <button id="start-quiz-btn">Começar Quiz</button>
+                </div>
+                <div id="quiz-game-screen" style="display: none;">
+                    <div id="quiz-question"></div>
+                    <div id="quiz-options" class="quiz-options"></div>
+                    <p id="quiz-feedback"></p>
+                    <button id="next-question-btn" style="display: none;">Próxima Pergunta</button>
+                </div>
+                <div id="quiz-end-screen" style="display: none;">
+                    <h3>Quiz Finalizado!</h3>
+                    <p>Sua pontuação: <span id="final-score">0</span></p>
+                    <p>Recorde: <span id="high-score">0</span></p>
+                    <button id="restart-quiz-btn">Jogar Novamente</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="trailers">
+            <h2>Trailers em Destaque</h2>
+            <div class="search-container">
+                <input type="text" id="trailer-search-input" placeholder="Pesquisar por trailer...">
+                <button id="trailer-search-button">Pesquisar</button>
+            </div>
+            <div class="carousel-container">
+                <div id="trailer-carousel" class="carousel">
+                </div>
+                <button class="carousel-btn prev"><</button>
+                <button class="carousel-btn next">></button>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-container">
+    <p>© 2025 CineScope. Todos os direitos reservados.</p>
+
+    <div class="footer-links">
+      <a href="mailto:contato@cinescope.com" class="footer-icon">
+        📧 contato@cinescope.com
+      </a>
+      <a href="https://www.linkedin.com/in/luaradev" target="_blank" class="footer-icon">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" />
+        LinkedIn
+      </a>
+    </div>
+
+    <p class="creditos">Desenvolvido por <strong>Luara Gonçalves</strong></p>
+  </div>
+</footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
